@@ -1,16 +1,23 @@
-# covid19
+# COVID-19 Tracker - Get the latest Coronavirus Updates
 
-A new Flutter application.
+a flutter app that fetches corona virus data from api
 
-## Getting Started
+## ⭐ the repo if you like the app
 
-This project is a starting point for a Flutter application.
+# Screenshots
 
-A few resources to get you started if this is your first Flutter project:
+![alt text](https://www10.0zz0.com/2020/03/22/23/641046792.jpg)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+![alt text](https://www10.0zz0.com/2020/03/22/23/613377287.jpg)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![alt text](https://www10.0zz0.com/2020/03/22/23/879741028.jpg)
+
+![alt text](https://www14.0zz0.com/2020/03/22/23/483298017.jpg)
+
+![alt text](https://www14.0zz0.com/2020/03/22/23/873524346.jpg)
+
+
+
+- [Used API Repo](https://github.com/javieraviles/covidAPI)
+
+- [My Linkedin](https://www.linkedin.com/in/ahmedhalbas)
