@@ -4,6 +4,7 @@ import '../services/COVID.dart';
 import '../components/reusable_card.dart';
 import '../utilities/constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:intl/intl.dart';
 
 class COVIDCountryScreen extends StatefulWidget {
   final String selectedCountry;
@@ -18,6 +19,8 @@ class _PriceScreenState extends State<COVIDCountryScreen> {
   Map<String, int> totalCOVIDData = {};
   bool isWaiting = false;
   bool showSpinner = false;
+  final formatter = NumberFormat("#,###");
+  var deathPercentage;
 
   void getData() async {
     isWaiting = true;
@@ -35,6 +38,9 @@ class _PriceScreenState extends State<COVIDCountryScreen> {
 
     setState(() {
       totalCOVIDData = data;
+      deathPercentage =
+          ((totalCOVIDData['deaths'] / totalCOVIDData['cases']) * 100)
+              .toStringAsFixed(2);
     });
   }
 
@@ -70,9 +76,12 @@ class _PriceScreenState extends State<COVIDCountryScreen> {
                             'Total Cases',
                             style: kLabelTextStyle,
                           ),
-                          Text(
-                            '${isWaiting ? '?' : totalCOVIDData['cases']}',
-                            style: kNumberTextStyle,
+                          FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              '${isWaiting ? '?' : formatter.format(totalCOVIDData['cases'])}',
+                              style: kNumberTextStyle,
+                            ),
                           ),
                         ],
                       ),
@@ -88,9 +97,19 @@ class _PriceScreenState extends State<COVIDCountryScreen> {
                             'Total Deaths',
                             style: kLabelTextStyle,
                           ),
+                          FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              '${isWaiting ? '?' : formatter.format(totalCOVIDData['deaths'])}',
+                              style: kNumberTextStyle,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
                           Text(
-                            '${isWaiting ? '?' : totalCOVIDData['deaths']}',
-                            style: kNumberTextStyle,
+                            '${isWaiting ? '?' : deathPercentage}%',
+                            style: kLabelTextStyle,
                           ),
                         ],
                       ),
@@ -112,9 +131,12 @@ class _PriceScreenState extends State<COVIDCountryScreen> {
                             'Today Cases',
                             style: kLabelTextStyle,
                           ),
-                          Text(
-                            '${isWaiting ? '?' : totalCOVIDData['todayCases']}',
-                            style: kNumberTextStyle,
+                          FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              '${isWaiting ? '?' : formatter.format(totalCOVIDData['todayCases'])}',
+                              style: kNumberTextStyle,
+                            ),
                           ),
                         ],
                       ),
@@ -130,9 +152,12 @@ class _PriceScreenState extends State<COVIDCountryScreen> {
                             'Today Deaths',
                             style: kLabelTextStyle,
                           ),
-                          Text(
-                            '${isWaiting ? '?' : totalCOVIDData['todayDeaths']}',
-                            style: kNumberTextStyle,
+                          FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              '${isWaiting ? '?' : formatter.format(totalCOVIDData['todayDeaths'])}',
+                              style: kNumberTextStyle,
+                            ),
                           ),
                         ],
                       ),
@@ -154,9 +179,12 @@ class _PriceScreenState extends State<COVIDCountryScreen> {
                             'Total Recovered',
                             style: kLabelTextStyle,
                           ),
-                          Text(
-                            '${isWaiting ? '?' : totalCOVIDData['recovered']}',
-                            style: kNumberTextStyle,
+                          FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              '${isWaiting ? '?' : formatter.format(totalCOVIDData['recovered'])}',
+                              style: kNumberTextStyle,
+                            ),
                           ),
                         ],
                       ),
@@ -169,12 +197,15 @@ class _PriceScreenState extends State<COVIDCountryScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            'Still Active',
+                            'Active Cases',
                             style: kLabelTextStyle,
                           ),
-                          Text(
-                            '${isWaiting ? '?' : totalCOVIDData['active']}',
-                            style: kNumberTextStyle,
+                          FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              '${isWaiting ? '?' : formatter.format(totalCOVIDData['active'])}',
+                              style: kNumberTextStyle,
+                            ),
                           ),
                         ],
                       ),

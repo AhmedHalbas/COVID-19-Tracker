@@ -4,6 +4,7 @@ import '../services/COVID.dart';
 import '../components/reusable_card.dart';
 import '../utilities/constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:intl/intl.dart';
 
 class COVIDGlobalScreen extends StatefulWidget {
   final String selectedCountry;
@@ -18,6 +19,8 @@ class _PriceScreenState extends State<COVIDGlobalScreen> {
   Map<String, int> totalCOVIDData = {};
   bool isWaiting = false;
   bool showSpinner = false;
+  final formatter = NumberFormat("#,###");
+  var deathPercentage;
 
   void getData() async {
     isWaiting = true;
@@ -35,6 +38,9 @@ class _PriceScreenState extends State<COVIDGlobalScreen> {
 
     setState(() {
       totalCOVIDData = data;
+      deathPercentage =
+          ((totalCOVIDData['deaths'] / totalCOVIDData['cases']) * 100)
+              .toStringAsFixed(2);
     });
   }
 
@@ -68,7 +74,7 @@ class _PriceScreenState extends State<COVIDGlobalScreen> {
                       style: kLabelTextStyle,
                     ),
                     Text(
-                      '${isWaiting ? '?' : totalCOVIDData['cases']}',
+                      '${isWaiting ? '?' : formatter.format(totalCOVIDData['cases'])}',
                       style: kNumberTextStyle,
                     ),
                   ],
@@ -86,8 +92,15 @@ class _PriceScreenState extends State<COVIDGlobalScreen> {
                       style: kLabelTextStyle,
                     ),
                     Text(
-                      '${isWaiting ? '?' : totalCOVIDData['deaths']}',
+                      '${isWaiting ? '?' : formatter.format(totalCOVIDData['deaths'])} ',
                       style: kNumberTextStyle,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      '${isWaiting ? '?' : deathPercentage}%',
+                      style: kLabelTextStyle,
                     ),
                   ],
                 ),
@@ -104,7 +117,7 @@ class _PriceScreenState extends State<COVIDGlobalScreen> {
                       style: kLabelTextStyle,
                     ),
                     Text(
-                      '${isWaiting ? '?' : totalCOVIDData['recovered']}',
+                      '${isWaiting ? '?' : formatter.format(totalCOVIDData['recovered'])}',
                       style: kNumberTextStyle,
                     ),
                   ],
