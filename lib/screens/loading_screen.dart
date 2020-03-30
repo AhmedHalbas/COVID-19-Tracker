@@ -5,6 +5,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../services/countries_list.dart';
 import 'dart:io';
 import '../components/alert_dialog.dart';
+import '../services/firebase_notification_handler.dart';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -48,6 +49,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void initState() {
     super.initState();
     checkInternet();
+    FirebaseNotifications().setUpFirebase();
   }
 
   @override
