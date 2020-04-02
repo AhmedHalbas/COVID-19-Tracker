@@ -24,6 +24,36 @@ class _InputScreenState extends State<InputScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: <Widget>[
+          PopupMenuButton(
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem(
+                  child: Center(
+                    child: GestureDetector(
+                      child: Text(
+                        'About',
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                        showAlertDialog(context,
+                            title: 'About Developer',
+                            content:
+                                'Developed By Ahmed Halbas \n\n #Stay_Home',
+                            onPressed: () {
+                          Navigator.pop(context);
+                        });
+                      },
+                    ),
+                  ),
+                ),
+              ];
+            },
+          )
+        ],
         backgroundColor: Colors.black26,
         title: Text('COVID-19 Tracker'),
       ),
@@ -89,7 +119,7 @@ class _InputScreenState extends State<InputScreen> {
             ),
             Padding(
               padding: EdgeInsets.only(top: 40),
-              child: FlatButton(
+              child: GestureDetector(
                 child: Text(
                   'Global Cases Page',
                   style: TextStyle(
@@ -98,7 +128,7 @@ class _InputScreenState extends State<InputScreen> {
                     decoration: TextDecoration.underline,
                   ),
                 ),
-                onPressed: () {
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
