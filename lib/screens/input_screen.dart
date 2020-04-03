@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import '../components/alert_dialog.dart';
 import '../screens/COVID_global_screen.dart';
+import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 class InputScreen extends StatefulWidget {
   List<String> countries = [];
@@ -16,7 +17,6 @@ class InputScreen extends StatefulWidget {
 
 class _InputScreenState extends State<InputScreen> {
   String selectedCountry;
-
   GlobalKey<AutoCompleteTextFieldState<String>> key = new GlobalKey();
   TextEditingController _controller = TextEditingController();
 
@@ -43,8 +43,30 @@ class _InputScreenState extends State<InputScreen> {
                             title: 'About Developer',
                             content:
                                 'Developed By Ahmed Halbas \n\n #Stay_Home',
-                            onPressed: () {
+                            buttonText: 'Ok', onPressed: () {
                           Navigator.pop(context);
+                        });
+                      },
+                    ),
+                  ),
+                ),
+                PopupMenuItem(
+                  child: Center(
+                    child: GestureDetector(
+                      child: Text(
+                        'Emergency Call',
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                        showAlertDialog(context,
+                            title: 'Egyptian Preventive Emergency Line',
+                            content: 'Call 105 For Inquiries',
+                            buttonText: 'Call Now', onPressed: () {
+                          Navigator.pop(context);
+                          UrlLauncher.launch('tel:105');
                         });
                       },
                     ),
@@ -97,7 +119,7 @@ class _InputScreenState extends State<InputScreen> {
                   showAlertDialog(context,
                       title: 'Country Name Issue',
                       content: 'Please Enter Your Country Name Properly',
-                      onPressed: () {
+                      buttonText: 'Ok', onPressed: () {
                     Navigator.pop(context);
                   });
                 } else {

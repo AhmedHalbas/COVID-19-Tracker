@@ -38,6 +38,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
         context,
         title: 'Internet Connection Issue',
         content: 'Please Enable Your Network Data',
+        buttonText: 'Ok',
         onPressed: () {
           SystemChannels.platform.invokeMethod('SystemNavigator.pop');
         },
