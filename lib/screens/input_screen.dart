@@ -32,28 +32,6 @@ class _InputScreenState extends State<InputScreen> {
                   child: Center(
                     child: GestureDetector(
                       child: Text(
-                        'About',
-                        style: TextStyle(
-                          fontSize: 15,
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.pop(context);
-                        showAlertDialog(context,
-                            title: 'About Developer',
-                            content:
-                                'Developed By Ahmed Halbas \n\n #Stay_Home',
-                            buttonText: 'Ok', onPressed: () {
-                          Navigator.pop(context);
-                        });
-                      },
-                    ),
-                  ),
-                ),
-                PopupMenuItem(
-                  child: Center(
-                    child: GestureDetector(
-                      child: Text(
                         'Emergency Call',
                         style: TextStyle(
                           fontSize: 15,
@@ -67,6 +45,51 @@ class _InputScreenState extends State<InputScreen> {
                             buttonText: 'Call Now', onPressed: () {
                           Navigator.pop(context);
                           UrlLauncher.launch('tel:105');
+                        });
+                      },
+                    ),
+                  ),
+                ),
+                PopupMenuItem(
+                  child: Center(
+                    child: GestureDetector(
+                      child: Text(
+                        'Important Advice',
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                        showAlertDialog(context,
+                            title: 'World Health Organization Advice',
+                            content: 'Some Advice For Public From WHO Website',
+                            buttonText: 'Visit Now', onPressed: () {
+                          Navigator.pop(context);
+                          UrlLauncher.launch(
+                              'https:who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public');
+                        });
+                      },
+                    ),
+                  ),
+                ),
+                PopupMenuItem(
+                  child: Center(
+                    child: GestureDetector(
+                      child: Text(
+                        'About',
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                        showAlertDialog(context,
+                            title: 'About Developer',
+                            content:
+                                'Developed By Ahmed Halbas \n\n #Stay_Home',
+                            buttonText: 'Ok', onPressed: () {
+                          Navigator.pop(context);
                         });
                       },
                     ),
