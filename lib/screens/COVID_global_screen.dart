@@ -55,9 +55,6 @@ class _PriceScreenState extends State<COVIDGlobalScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Global COVID-19 Tracker'),
-      ),
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
         child: Column(

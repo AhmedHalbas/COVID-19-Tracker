@@ -1,4 +1,5 @@
-import 'package:covid19/screens/input_screen.dart';
+import 'package:covid19/screens/main_screen.dart';
+import 'package:covid19/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -20,7 +21,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     countries = await CountriesModel().getCountries();
 
     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
-      return InputScreen(
+      return MainScreen(
         countries: countries,
       );
     }), (_) => false);
@@ -36,6 +37,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     } on SocketException catch (_) {
       return showAlertDialog(
         context,
+        isDismissible: false,
         title: 'Internet Connection Issue',
         content: 'Please Enable Your Network Data',
         buttonText: 'Ok',
