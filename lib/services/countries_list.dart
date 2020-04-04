@@ -10,7 +10,7 @@ class CountriesModel {
 
     var COVIDData = await networkHelper.getCOVIDData();
 
-    for (var i = 0; i < COVIDData.length; i++) {
+    for (var i = 1; i < COVIDData.length; i++) {
       totalCountries.add(COVIDData[i]['country']);
     }
 

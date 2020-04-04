@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 showAlertDialog(BuildContext context,
-    {String title, String content, String buttonText, Function onPressed}) {
+    {String title,
+    String content,
+    String buttonText,
+    Function onPressed,
+    bool isDismissible}) {
   // set up the buttons
   Widget Button = FlatButton(child: Text(buttonText), onPressed: onPressed);
 
@@ -18,6 +22,7 @@ showAlertDialog(BuildContext context,
 
   WidgetsBinding.instance.addPostFrameCallback((_) {
     showDialog(
+      barrierDismissible: isDismissible,
       context: context,
       builder: (BuildContext context) {
         return alert;

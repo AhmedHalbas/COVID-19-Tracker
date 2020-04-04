@@ -15,8 +15,25 @@ class COVIDModel {
 
         totalCOVIDData[requiredData] = COVIDData[requiredData];
       }
+      return totalCOVIDData;
+    } else if (selectedCountry == 'countries') {
+      List<String> countriesList = [];
+      NetworkHelper networkHelper = NetworkHelper('$COVIDAPIURL/countries');
+      var COVIDData = await networkHelper.getCOVIDData();
+      for (int i = 1; i < COVIDData.length; i++) {
+        for (String requiredData in countriesRequiredDataList) {
+          totalCOVIDData[requiredData] = COVIDData[i][requiredData];
+        }
+
+        countriesList.add(totalCOVIDData
+            .toString()
+            .replaceAll(',', ' |')
+            .replaceFirst('{', '')
+            .replaceFirst('}', ''));
+      }
+      return countriesList;
     } else {
-      for (String requiredData in countriesRequiredDataList) {
+      for (String requiredData in countryRequiredDataList) {
         NetworkHelper networkHelper =
             NetworkHelper('$COVIDAPIURL/countries/$selectedCountry');
 
@@ -24,8 +41,7 @@ class COVIDModel {
 
         totalCOVIDData[requiredData] = COVIDData[requiredData];
       }
+      return totalCOVIDData;
     }
-
-    return totalCOVIDData;
   }
 }

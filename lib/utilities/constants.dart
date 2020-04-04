@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 
-const List<String> countriesRequiredDataList = [
+const List<String> countryRequiredDataList = [
   'cases',
   'todayCases',
   'deaths',
   'todayDeaths',
   'recovered',
   'active',
+];
+
+const List<String> countriesRequiredDataList = [
+  'cases',
+  'todayCases',
+  'deaths',
+  'todayDeaths',
+  'recovered',
 ];
 
 const List<String> globalRequiredDataList = [
@@ -27,6 +35,11 @@ const kLabelTextStyle = TextStyle(
 
 const kNumberTextStyle = TextStyle(
   fontSize: 40,
+  fontWeight: FontWeight.w900,
+);
+
+const kCountryNameTextStyle = TextStyle(
+  fontSize: 30,
   fontWeight: FontWeight.w900,
 );
 
