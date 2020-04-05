@@ -6,7 +6,7 @@ class NetworkHelper {
 
   NetworkHelper(this.url);
 
-  Future getCOVIDData() async {
+  Future getData() async {
     try {
       http.Response response = await http.get(url);
       if (response.statusCode == 200) {

@@ -1,27 +1,23 @@
+import 'package:covid19/services/covid19.dart';
+import 'package:covid19/services/networking.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import '../services/COVID.dart';
 import '../components/reusable_card.dart';
 import '../utilities/constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class COVIDCountriesScreen extends StatefulWidget {
-  final String selectedCountry;
-  List<String> countriesName = [];
-
-  COVIDCountriesScreen(
-      {@required this.selectedCountry, @required this.countriesName});
-
   @override
   _PriceScreenState createState() => _PriceScreenState();
 }
 
 class _PriceScreenState extends State<COVIDCountriesScreen> {
-  List<String> countriesList = [];
   bool isWaiting = false;
   bool showSpinner = false;
-  bool _isVisible = true;
   ScrollController controller;
+  String COVIDAPIURL = 'https://coronavirus-19-api.herokuapp.com/countries';
+  Covid19 covid19;
+  List<Covid19> countriesList = [];
 
   void getData() async {
     isWaiting = true;
@@ -29,16 +25,16 @@ class _PriceScreenState extends State<COVIDCountriesScreen> {
       showSpinner = true;
     });
 
-    var data = await COVIDModel().getCOVIDData(widget.selectedCountry);
+    var json = await NetworkHelper(COVIDAPIURL).getData();
+
+    for (int i = 1; i < json.length; i++) {
+      countriesList.add(Covid19.fromJson(json[i]));
+    }
 
     isWaiting = false;
 
     setState(() {
       showSpinner = false;
-    });
-
-    setState(() {
-      countriesList = data;
     });
   }
 
@@ -66,15 +62,20 @@ class _PriceScreenState extends State<COVIDCountriesScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    Text(
-                      widget.countriesName[position],
-                      style: kCountryNameTextStyle,
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 5),
+                        child: Text(
+                          countriesList[position].country,
+                          style: kCountryNameTextStyle,
+                        ),
+                      ),
                     ),
                     Row(
                       children: <Widget>[
                         Expanded(
                           child: Text(
-                            countriesList[position],
+                            'Total Cases: ${countriesList[position].cases} | Total Deaths: ${countriesList[position].deaths} | Today Cases: ${countriesList[position].todayCases} | Today Deaths: ${countriesList[position].cases} | Recovered: ${countriesList[position].recovered} | Active Cases: ${countriesList[position].active}',
                             style: kLabelTextStyle,
                           ),
                         ),

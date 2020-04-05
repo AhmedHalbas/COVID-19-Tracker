@@ -1,12 +1,9 @@
-import '../screens/COVID_country_screen.dart';
+import '../screens/covid_specific_country_screen.dart';
 import 'package:flutter/material.dart';
 import '../components/rounded_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import '../components/alert_dialog.dart';
-import '../screens/COVID_global_screen.dart';
-import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
-import '../screens/COVID_all_countries_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   List<String> countries = [];

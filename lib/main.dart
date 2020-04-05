@@ -1,4 +1,4 @@
-import 'package:covid19/screens/loading_screen.dart';
+import 'package:covid19/screens/covid_loading_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());

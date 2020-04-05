@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import '../components/alert_dialog.dart';
 import '../screens/COVID_global_screen.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
-import '../screens/COVID_all_countries_screen.dart';
-import '../screens/search_screen.dart';
+import '../screens/covid_countries_list_screen.dart';
+import '../screens/covid_search_country_screen.dart';
 
 class MainScreen extends StatefulWidget {
   List<String> countries = [];
@@ -27,15 +27,10 @@ class _InputScreenState extends State<MainScreen> {
         );
         break;
       case 1:
-        child = COVIDGlobalScreen(
-          selectedCountry: 'all',
-        );
+        child = COVIDGlobalScreen();
         break;
       case 2:
-        child = COVIDCountriesScreen(
-          selectedCountry: 'countries',
-          countriesName: widget.countries,
-        );
+        child = COVIDCountriesScreen();
         break;
     }
     return Scaffold(

@@ -1,12 +1,11 @@
-import 'package:covid19/screens/main_screen.dart';
-import 'package:covid19/screens/search_screen.dart';
+import '../screens/covid_main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import '../services/countries_list.dart';
 import 'dart:io';
 import '../components/alert_dialog.dart';
 import '../services/firebase_notification_handler.dart';
+import '../services/networking.dart';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -16,9 +15,14 @@ class LoadingScreen extends StatefulWidget {
 class _LoadingScreenState extends State<LoadingScreen> {
   List<String> countries = [];
   bool _noInternet = true;
+  String COVIDAPIURL = 'https://coronavirus-19-api.herokuapp.com/countries';
 
   void getCountries() async {
-    countries = await CountriesModel().getCountries();
+    var json = await NetworkHelper(COVIDAPIURL).getData();
+
+    for (int i = 1; i < json.length; i++) {
+      countries.add(json[i]['country'].toString());
+    }
 
     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
       return MainScreen(

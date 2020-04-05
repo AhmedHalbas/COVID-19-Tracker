@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import '../services/COVID.dart';
+import '../services/covid19.dart';
 import '../components/reusable_card.dart';
 import '../utilities/constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:intl/intl.dart';
+import '../services/networking.dart';
 
 class COVIDGlobalScreen extends StatefulWidget {
-  final String selectedCountry;
-
-  COVIDGlobalScreen({@required this.selectedCountry});
-
   @override
   _PriceScreenState createState() => _PriceScreenState();
 }
 
 class _PriceScreenState extends State<COVIDGlobalScreen> {
-  Map<String, int> totalCOVIDData = {};
   bool isWaiting = false;
   bool showSpinner = false;
   final formatter = NumberFormat("#,###");
   var deathPercentage;
+  String COVIDAPIURL = 'https://coronavirus-19-api.herokuapp.com/all';
+  Covid19 covid19;
 
   void getData() async {
     isWaiting = true;
@@ -28,7 +26,8 @@ class _PriceScreenState extends State<COVIDGlobalScreen> {
       showSpinner = true;
     });
 
-    var data = await COVIDModel().getCOVIDData(widget.selectedCountry);
+    var json = await NetworkHelper(COVIDAPIURL).getData();
+    covid19 = Covid19.fromJson(json);
 
     isWaiting = false;
 
@@ -37,10 +36,8 @@ class _PriceScreenState extends State<COVIDGlobalScreen> {
     });
 
     setState(() {
-      totalCOVIDData = data;
       deathPercentage =
-          ((totalCOVIDData['deaths'] / totalCOVIDData['cases']) * 100)
-              .toStringAsFixed(2);
+          ((covid19.deaths / covid19.cases) * 100).toStringAsFixed(2);
     });
   }
 
@@ -71,7 +68,7 @@ class _PriceScreenState extends State<COVIDGlobalScreen> {
                       style: kLabelTextStyle,
                     ),
                     Text(
-                      '${isWaiting ? '?' : formatter.format(totalCOVIDData['cases'])}',
+                      '${isWaiting ? '?' : formatter.format(covid19.cases)}',
                       style: kNumberTextStyle,
                     ),
                   ],
@@ -89,7 +86,7 @@ class _PriceScreenState extends State<COVIDGlobalScreen> {
                       style: kLabelTextStyle,
                     ),
                     Text(
-                      '${isWaiting ? '?' : formatter.format(totalCOVIDData['deaths'])} ',
+                      '${isWaiting ? '?' : formatter.format(covid19.deaths)} ',
                       style: kNumberTextStyle,
                     ),
                     SizedBox(
@@ -114,7 +111,7 @@ class _PriceScreenState extends State<COVIDGlobalScreen> {
                       style: kLabelTextStyle,
                     ),
                     Text(
-                      '${isWaiting ? '?' : formatter.format(totalCOVIDData['recovered'])}',
+                      '${isWaiting ? '?' : formatter.format(covid19.recovered)}',
                       style: kNumberTextStyle,
                     ),
                   ],

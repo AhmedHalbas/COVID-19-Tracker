@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 class FirebaseNotifications {
@@ -11,9 +9,7 @@ class FirebaseNotifications {
   }
 
   void firebaseCloudMessaging_Listeners() {
-    _firebaseMessaging.getToken().then((token) {
-      print(token);
-    });
+    _firebaseMessaging.getToken();
 
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {

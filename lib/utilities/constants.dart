@@ -1,31 +1,5 @@
 import 'package:flutter/material.dart';
 
-const List<String> countryRequiredDataList = [
-  'cases',
-  'todayCases',
-  'deaths',
-  'todayDeaths',
-  'recovered',
-  'active',
-];
-
-const List<String> countriesRequiredDataList = [
-  'cases',
-  'todayCases',
-  'deaths',
-  'todayDeaths',
-  'recovered',
-];
-
-const List<String> globalRequiredDataList = [
-  'cases',
-  'todayCases',
-  'deaths',
-  'todayDeaths',
-  'recovered',
-  'active',
-];
-
 const kActiveCardColour = Color(0XFF1D1E33);
 
 const kLabelTextStyle = TextStyle(
