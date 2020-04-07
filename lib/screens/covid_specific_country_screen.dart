@@ -6,6 +6,7 @@ import '../components/reusable_card.dart';
 import '../utilities/constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:intl/intl.dart';
+import '../components/internet_connection.dart';
 
 class COVIDCountryScreen extends StatefulWidget {
   final String selectedCountry;
@@ -25,6 +26,7 @@ class _PriceScreenState extends State<COVIDCountryScreen> {
   String COVIDAPIURL = 'https://coronavirus-19-api.herokuapp.com/countries/';
   Covid19 covid19;
   Text title;
+  var json;
 
   void getData() async {
     isWaiting = true;
@@ -32,8 +34,11 @@ class _PriceScreenState extends State<COVIDCountryScreen> {
       showSpinner = true;
     });
 
-    var json =
+    json =
         await NetworkHelper('$COVIDAPIURL${widget.selectedCountry}').getData();
+
+    checkInternet(context, json);
+
     covid19 = Covid19.fromJson(json);
 
     isWaiting = false;

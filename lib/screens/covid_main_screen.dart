@@ -5,6 +5,7 @@ import '../screens/COVID_global_screen.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 import '../screens/covid_countries_list_screen.dart';
 import '../screens/covid_search_country_screen.dart';
+import 'dart:io';
 
 class MainScreen extends StatefulWidget {
   List<String> countries = [];
@@ -16,6 +17,32 @@ class MainScreen extends StatefulWidget {
 
 class _InputScreenState extends State<MainScreen> {
   int _index = 0;
+  final globalKey = GlobalKey<ScaffoldState>();
+
+  void checkInternet() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        print('There is an Internet Connection');
+      }
+    } on SocketException catch (_) {
+      _showToast(context);
+    }
+  }
+
+  void _showToast(BuildContext context) {
+    globalKey.currentState.showSnackBar(
+      SnackBar(
+        content: Text('No Internet Connection'),
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkInternet();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +61,7 @@ class _InputScreenState extends State<MainScreen> {
         break;
     }
     return Scaffold(
+      key: globalKey,
       appBar: AppBar(
         actions: <Widget>[
           PopupMenuButton(

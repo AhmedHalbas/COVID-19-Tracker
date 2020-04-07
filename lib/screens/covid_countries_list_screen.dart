@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import '../components/reusable_card.dart';
 import '../utilities/constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import '../components/internet_connection.dart';
 
 class COVIDCountriesScreen extends StatefulWidget {
   @override
@@ -18,6 +19,7 @@ class _PriceScreenState extends State<COVIDCountriesScreen> {
   String COVIDAPIURL = 'https://coronavirus-19-api.herokuapp.com/countries';
   Covid19 covid19;
   List<Covid19> countriesList = [];
+  var json;
 
   void getData() async {
     isWaiting = true;
@@ -25,7 +27,8 @@ class _PriceScreenState extends State<COVIDCountriesScreen> {
       showSpinner = true;
     });
 
-    var json = await NetworkHelper(COVIDAPIURL).getData();
+    json = await NetworkHelper(COVIDAPIURL).getData();
+    checkInternet(context, json);
 
     for (int i = 1; i < json.length; i++) {
       countriesList.add(Covid19.fromJson(json[i]));

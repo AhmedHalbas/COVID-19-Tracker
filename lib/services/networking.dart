@@ -1,19 +1,26 @@
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
+import 'package:dio_http_cache/dio_http_cache.dart';
 
 class NetworkHelper {
   final String url;
+  Response response;
+  Dio dio = new Dio();
 
   NetworkHelper(this.url);
 
   Future getData() async {
     try {
-      http.Response response = await http.get(url);
+      dio.interceptors
+          .add(DioCacheManager(CacheConfig(baseUrl: url)).interceptor);
+      response = await dio.get(
+        url,
+        options: buildCacheOptions(
+          Duration(minutes: 1),
+          maxStale: Duration(days: 6),
+        ),
+      );
       if (response.statusCode == 200) {
-        return jsonDecode(response.body);
-      } else {
-        print(response.statusCode);
-        throw 'Problem with the get request';
+        return response.data;
       }
     } catch (e) {
       print(e);

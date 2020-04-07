@@ -6,6 +6,7 @@ import '../utilities/constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:intl/intl.dart';
 import '../services/networking.dart';
+import '../components/internet_connection.dart';
 
 class COVIDGlobalScreen extends StatefulWidget {
   @override
@@ -19,6 +20,7 @@ class _PriceScreenState extends State<COVIDGlobalScreen> {
   var deathPercentage;
   String COVIDAPIURL = 'https://coronavirus-19-api.herokuapp.com/all';
   Covid19 covid19;
+  var json;
 
   void getData() async {
     isWaiting = true;
@@ -26,7 +28,8 @@ class _PriceScreenState extends State<COVIDGlobalScreen> {
       showSpinner = true;
     });
 
-    var json = await NetworkHelper(COVIDAPIURL).getData();
+    json = await NetworkHelper(COVIDAPIURL).getData();
+    checkInternet(context, json);
     covid19 = Covid19.fromJson(json);
 
     isWaiting = false;
