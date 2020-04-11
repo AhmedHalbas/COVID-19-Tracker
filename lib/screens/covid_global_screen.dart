@@ -70,6 +70,7 @@ class _PriceScreenState extends State<COVIDGlobalScreen> {
               itemValue: covid19?.deaths,
               isWaiting: isWaiting,
               formatter: formatter,
+              deathPercentage: deathPercentage,
             ),
             CovidItem(
               itemText: 'Total Recovered',

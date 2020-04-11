@@ -9,12 +9,14 @@ class CovidItem extends StatelessWidget {
   final NumberFormat formatter;
   final String itemText;
   final int itemValue;
+  final String deathPercentage;
 
   CovidItem({
     @required this.itemText,
     @required this.itemValue,
     @required this.isWaiting,
     @required this.formatter,
+    this.deathPercentage,
   });
 
   @override
@@ -33,9 +35,22 @@ class CovidItem extends StatelessWidget {
               padding: EdgeInsets.all(8.0),
               child: FittedBox(
                 fit: BoxFit.scaleDown,
-                child: Text(
-                  '${isWaiting ? '?' : formatter.format(itemValue)}',
-                  style: kNumberTextStyle,
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      '${isWaiting ? '?' : formatter.format(itemValue)}',
+                      style: kNumberTextStyle,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    deathPercentage != null
+                        ? Text(
+                            '${isWaiting ? '?' : deathPercentage}%',
+                            style: kLabelTextStyle,
+                          )
+                        : Container(),
+                  ],
                 ),
               ),
             ),

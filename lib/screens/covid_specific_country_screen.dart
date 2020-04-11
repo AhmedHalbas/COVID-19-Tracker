@@ -85,6 +85,7 @@ class _PriceScreenState extends State<COVIDCountryScreen> {
                     itemValue: covid19?.deaths,
                     isWaiting: isWaiting,
                     formatter: formatter,
+                    deathPercentage: deathPercentage,
                   ),
                 ],
               ),
