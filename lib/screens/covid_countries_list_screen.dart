@@ -30,7 +30,7 @@ class _PriceScreenState extends State<COVIDCountriesScreen> {
     json = await NetworkHelper(COVIDAPIURL).getData();
     checkInternet(context, json);
 
-    for (int i = 8; i < json.length; i++) {
+    for (int i = 1; i < json.length; i++) {
       countriesList.add(Covid19.fromJson(json[i]));
     }
 
