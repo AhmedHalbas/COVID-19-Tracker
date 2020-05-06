@@ -78,7 +78,7 @@ class _PriceScreenState extends State<COVIDCountriesScreen> {
                       children: <Widget>[
                         Expanded(
                           child: Text(
-                            'Total Cases: ${countriesList[position].cases} | Total Deaths: ${countriesList[position].deaths} | Today Cases: ${countriesList[position].todayCases} | Today Deaths: ${countriesList[position].cases} | Recovered: ${countriesList[position].recovered} | Active Cases: ${countriesList[position].active}',
+                            'Total Cases: ${countriesList[position].cases} | Total Deaths: ${countriesList[position].deaths} | Today Cases: ${countriesList[position].todayCases} | Today Deaths: ${countriesList[position].todayDeaths} | Recovered: ${countriesList[position].recovered} | Active Cases: ${countriesList[position].active}',
                             style: kLabelTextStyle,
                           ),
                         ),
