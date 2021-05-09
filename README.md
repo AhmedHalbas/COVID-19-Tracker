@@ -1,8 +1,47 @@
+<p align="center">
+<a href="https://linkedin.com/in/ahmedhalbas" target="blank"><img align="center" src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/linkedin.svg" alt="ahmedhalbas" height="30" width="30" /></a>
+</p>
+
+
 # COVID-19 Tracker - Get the latest Coronavirus Updates
 
-a flutter app that fetches corona virus data from API
 
 ## ⭐ The Repo If You Like The App
+
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="">
+    <img src="images/covid_19_icon.png" alt="Logo" width="200" height="200">
+  </a>
+
+  <a href="https://halbas-covid19.uptodown.com/android">
+      <h3 align="center">COVID-19 Tracker</h3>
+
+  </a>
+
+  <p align="center">
+   a Flutter App That Fetches Corona Virus Data From API
+    <br />
+   
+  </p>
+</p>
+
+
+
+
+
+
+### Technologies Used
+
+* Flutter
+* Dio (HTTP)
+
+
+
+
+
+
 
 # Screenshots
 
@@ -32,4 +71,3 @@ a flutter app that fetches corona virus data from API
 
 - [Used API](https://github.com/javieraviles/covidAPI)
 
-- [My Linkedin](https://www.linkedin.com/in/ahmedhalbas)
